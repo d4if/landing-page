@@ -15,6 +15,12 @@ export default function Card({ student }: CardProps) {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
+
+        {/* Category Badge */}
+        <div className="absolute top-3 right-3">
+          <CategoryBadge category={student.category} />
+        </div>
+
         {/* Tags overlay */}
         {student.tags && student.tags.length > 0 && (
           <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-wrap gap-1.5 bg-gradient-to-t from-black/60 to-transparent">
@@ -52,8 +58,22 @@ export default function Card({ student }: CardProps) {
           {student.description}
         </p>
 
-        {/* Social Links */}
-        <div className="flex gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+        {/* Action Links */}
+        <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+          {/* Preview Website — only for website category */}
+          {student.category === "website" && student.previewUrl && (
+            <a
+              href={student.previewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors px-3 py-1.5 rounded-lg"
+              aria-label={`Preview website ${student.title}`}
+            >
+              <PreviewIcon />
+              Preview
+            </a>
+          )}
+
           {student.linkedin && (
             <a
               href={student.linkedin}
@@ -81,6 +101,57 @@ export default function Card({ student }: CardProps) {
         </div>
       </div>
     </article>
+  );
+}
+
+/* ── Sub-components ── */
+
+function CategoryBadge({ category }: { category: Student["category"] }) {
+  const map: Record<
+    Student["category"],
+    { label: string; className: string }
+  > = {
+    website: {
+      label: "Website",
+      className: "bg-indigo-500/80 text-white",
+    },
+    iot: {
+      label: "IoT",
+      className: "bg-emerald-500/80 text-white",
+    },
+    algorithm: {
+      label: "Algoritma",
+      className: "bg-amber-500/80 text-white",
+    },
+  };
+
+  const { label, className } = map[category];
+
+  return (
+    <span
+      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm border border-white/30 ${className}`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function PreviewIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-3.5 h-3.5"
+    >
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
   );
 }
 
