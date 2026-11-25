@@ -126,11 +126,26 @@ function CategoryBadge({ category }: { category: Student["category"] }) {
       label: "IoT",
       className: "bg-emerald-500/80 text-white",
     },
+    mobile: {
+      label: "Mobile",
+      className: "bg-purple-500/80 text-white",
+    },
     algorithm: {
       label: "Algoritma",
       className: "bg-amber-500/80 text-white",
     },
   };
+
+  const { label, className } = map[category];
+
+  return (
+    <span
+      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm border border-white/30 ${className}`}
+    >
+      {label}
+    </span>
+  );
+}
 
   const { label, className } = map[category];
 
