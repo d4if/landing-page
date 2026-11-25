@@ -11,6 +11,8 @@ export interface Student {
   github?: string;
   previewUrl?: string; // only for website projects
   tags?: string[];
+  npm?: sting,
+  avatarUrl?: string;
 }
 
 export const students: Student[] = [
