@@ -20,24 +20,22 @@ export default function Card({ student }: CardProps) {
         <div className="absolute top-3 right-3">
           <CategoryBadge category={student.category} />
         </div>
+      </div>
 
-        {/* Tags overlay */}
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-5 gap-3">
         {student.tags && student.tags.length > 0 && (
-          <div className="absolute bottom-0 left-0 right-0 p-3 flex flex-wrap gap-1.5 bg-gradient-to-t from-black/60 to-transparent">
+          <div className="flex flex-wrap gap-1.5">
             {student.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-sm text-white border border-white/30"
+                className="text-xs font-medium px-2 py-0.5 rounded-full bg-white/20 border border-black"
               >
                 {tag}
               </span>
             ))}
           </div>
         )}
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
         {/* Title */}
         <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2">
           {student.title}
