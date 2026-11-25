@@ -1,4 +1,4 @@
-export type ProjectCategory = "website" | "iot" | "algorithm | "mobile";
+export type ProjectCategory = "website" | "iot" | "algorithm" | "mobile";
 
 export interface Student {
   id: number;
@@ -11,7 +11,7 @@ export interface Student {
   github?: string;
   previewUrl?: string; // only for website projects
   tags?: string[];
-  npm?: sting,
+  npm?: string,
   avatarUrl?: string;
 }
 
