@@ -35,8 +35,10 @@ export const students: Student[] = [
     name: "Ode Andi Alamsyah",
     npm: "7142300002",
     title: "Particle Swarm Optimization–Tuned Random Forest for Multi-Class Mental Health Sentiment Classification from Textual Data",
-    description:
-      "Model machine learning berbasis CNN untuk mendeteksi penyakit tanaman dari foto daun dengan akurasi 94%, diimplementasikan sebagai aplikasi mobile lintas platform.",
+    description: `# I. Pendahuluan
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+  
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA_f3j98fanps-v78Aq5wx6BgCsWRijuYiWmDWkbZktA&s",
     category: "algorithm",
     avatarUrl: "https://avatars.githubusercontent.com/u/147012411?s=64&v=4",

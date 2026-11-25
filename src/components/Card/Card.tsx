@@ -1,113 +1,132 @@
+import { useState } from "react";
 import type { Student } from "../../data/students";
+import StudentModal from "../Modal/StudentModal";
+import ReactMarkdown from 'react-markdown';
 
 interface CardProps {
   student: Student;
 }
 
 export default function Card({ student }: CardProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
-    <article className="group flex flex-col bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
-      {/* Thumbnail */}
-      <div className="relative overflow-hidden h-48">
-        <img
-          src={student.image}
-          alt={student.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
+    <>
+      {modalOpen && (
+        <StudentModal student={student} onClose={() => setModalOpen(false)} />
+      )}
 
-        {/* Category Badge */}
-        <div className="absolute top-3 right-3">
-          <CategoryBadge category={student.category} />
+      <article
+        onClick={() => setModalOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setModalOpen(true)}
+        className="group flex flex-col bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 cursor-pointer select-none"
+      >
+        {/* Thumbnail */}
+        <div className="relative overflow-hidden h-48">
+          <img
+            src={student.image}
+            alt={student.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+
+          {/* Category Badge */}
+          <div className="absolute top-3 right-3">
+            <CategoryBadge category={student.category} />
+          </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
-        {student.tags && student.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {student.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs font-medium px-2 py-0.5 rounded-full bg-white/20 border border-black"
-              >
-                {tag}
+        {/* Content */}
+        <div className="flex flex-col flex-1 p-5 gap-3">
+          {student.tags && student.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {student.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs font-medium px-2 py-0.5 rounded-full bg-white/20 border border-black"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Title */}
+          <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2">
+            {student.title}
+          </h2>
+
+          {/* Author */}
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+              <img
+                className="w-full h-full rounded-full object-cover"
+                src={student.avatarUrl}
+                alt=""
+              />
+            </div>
+            <div>
+              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
+                {student.name}
               </span>
-            ))}
+              <p className="text-xs text-slate-500">{student.npm}</p>
+            </div>
           </div>
-        )}
-        {/* Title */}
-        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2">
-          {student.title}
-        </h2>
 
-        {/* Author */}
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-            <img 
-              className="w-full h-full rounded-full object-cover"
-              src={student.avatarUrl} 
-              alt=""
-            />
-          </div>
-          <div>
-            <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
-              {student.name}
-            </span>
-            <p className="text-xs text-slate-500">{student.npm}</p>
+          {/* Description (plain excerpt on card) */}
+          <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3 flex-1">
+            {student.description}
+          </p>
+
+          {/* Action Links */}
+          <div
+            className="flex flex-wrap gap-2 pt-2 border-t border-gray-100 dark:border-gray-700"
+            onClick={(e) => e.stopPropagation()} // prevent card modal from opening when clicking links
+          >
+            {/* Preview Website — only for website category */}
+            {student.category === "website" && student.previewUrl && (
+              <a
+                href={student.previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors px-3 py-1.5 rounded-lg"
+                aria-label={`Preview website ${student.title}`}
+              >
+                <PreviewIcon />
+                Preview
+              </a>
+            )}
+
+            {student.linkedin && (
+              <a
+                href={student.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                aria-label={`LinkedIn ${student.name}`}
+              >
+                <LinkedInIcon />
+                LinkedIn
+              </a>
+            )}
+            {student.github && (
+              <a
+                href={student.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                aria-label={`GitHub ${student.name}`}
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+            )}
           </div>
         </div>
-
-        
-
-        {/* Description */}
-        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3 flex-1">
-          {student.description}
-        </p>
-
-        {/* Action Links */}
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
-          {/* Preview Website — only for website category */}
-          {student.category === "website" && student.previewUrl && (
-            <a
-              href={student.previewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors px-3 py-1.5 rounded-lg"
-              aria-label={`Preview website ${student.title}`}
-            >
-              <PreviewIcon />
-              Preview
-            </a>
-          )}
-
-          {student.linkedin && (
-            <a
-              href={student.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              aria-label={`LinkedIn ${student.name}`}
-            >
-              <LinkedInIcon />
-              LinkedIn
-            </a>
-          )}
-          {student.github && (
-            <a
-              href={student.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-              aria-label={`GitHub ${student.name}`}
-            >
-              <GitHubIcon />
-              GitHub
-            </a>
-          )}
-        </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 }
 
