@@ -22,7 +22,7 @@ const CATEGORY_META: Record<
   },
   mobile: {
     heading: "Mobile",
-    sub: "Aplikasi berbasis mobile"
+    sub: "Aplikasi berbasis mobile",
   },
   algorithm: {
     heading: "Penerapan Algoritma",
@@ -33,8 +33,14 @@ const CATEGORY_META: Record<
 export default function App() {
   const [activeCategory, setActiveCategory] = useState<NavCategory>("all");
 
-  const counts = useMemo(() => {
-    const c = { all: students.length, website: 0, iot: 0, algorithm: 0 };
+  const counts = useMemo<Record<NavCategory, number>>(() => {
+    const c: Record<NavCategory, number> = {
+      all: students.length,
+      website: 0,
+      iot: 0,
+      mobile: 0,
+      algorithm: 0,
+    };
     for (const s of students) c[s.category]++;
     return c;
   }, []);
