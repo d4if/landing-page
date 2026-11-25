@@ -1,4 +1,4 @@
-export type ProjectCategory = "website" | "iot" | "algorithm";
+export type ProjectCategory = "website" | "iot" | "algorithm | "mobile";
 
 export interface Student {
   id: number;

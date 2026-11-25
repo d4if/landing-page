@@ -47,8 +47,7 @@ export default function Card({ student }: CardProps) {
             <img 
               className="w-full h-full rounded-full object-cover"
               src={student.avatarUrl} 
-              alt="" 
-              srcset="" 
+              alt=""
             />
           </div>
           <div>
