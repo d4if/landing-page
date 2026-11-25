@@ -20,6 +20,10 @@ const CATEGORY_META: Record<
     heading: "Karya IoT",
     sub: "Proyek perangkat keras, embedded system, dan Internet of Things",
   },
+  mobile: {
+    heading: "Mobile",
+    sub: "Aplikasi berbasis mobile"
+  },
   algorithm: {
     heading: "Penerapan Algoritma",
     sub: "Implementasi algoritma, kecerdasan buatan, dan machine learning",

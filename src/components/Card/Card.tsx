@@ -44,12 +44,22 @@ export default function Card({ student }: CardProps) {
         {/* Author */}
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-            {student.name.charAt(0)}
+            <img 
+              className="w-full h-full rounded-full object-cover"
+              src={student.avatarUrl} 
+              alt="" 
+              srcset="" 
+            />
           </div>
-          <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
-            {student.name}
-          </span>
+          <div>
+            <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
+              {student.name}
+            </span>
+            <p className="text-xs text-slate-500">{student.npm}</p>
+          </div>
         </div>
+
+        
 
         {/* Description */}
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3 flex-1">

@@ -40,6 +40,12 @@ export default function Header({
       description: "Perangkat & sistem embedded",
     },
     {
+      id: "mobile",
+      label: "Mobile",
+      icon: <MobileIcon />,
+      description: "Aplikasi berbasis mobile",
+    },
+    {
       id: "algorithm",
       label: "Algoritma",
       icon: <AlgorithmIcon />,
@@ -54,16 +60,20 @@ export default function Header({
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
-              S
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+              <img
+                className="w-full rounded-full object-cover" 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2TCnmsDXnyYVqXn-hwVL9HuE7e_0my12Pwg-Gtl_URg&s=10" 
+                alt="" 
+              />
             </div>
             <div>
-              <span className="font-bold text-gray-900 dark:text-white text-base tracking-tight">
-                Showcase
+              {/* <span className="font-bold text-gray-900 dark:text-white text-base tracking-tight">
+                Universitas Logistik dan Bisnis Internasional
               </span>
               <span className="ml-1.5 text-xs font-medium px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300">
-                Mahasiswa
-              </span>
+                Universitas Logistik dan Bisnis Internasional
+              </span> */}
             </div>
           </div>
 
@@ -196,6 +206,24 @@ function AlgorithmIcon() {
       className="w-4 h-4"
     >
       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+    </svg>
+  );
+}
+
+function MobileIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-4 h-4"
+    >
+      <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+      <path d="M12 18h.01" />
     </svg>
   );
 }
