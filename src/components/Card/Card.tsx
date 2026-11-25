@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Student } from "../../data/students";
 import StudentModal from "../Modal/StudentModal";
-import ReactMarkdown from 'react-markdown';
 
 interface CardProps {
   student: Student;
