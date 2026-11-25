@@ -147,17 +147,6 @@ function CategoryBadge({ category }: { category: Student["category"] }) {
   );
 }
 
-  const { label, className } = map[category];
-
-  return (
-    <span
-      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm border border-white/30 ${className}`}
-    >
-      {label}
-    </span>
-  );
-}
-
 function PreviewIcon() {
   return (
     <svg
